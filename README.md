@@ -1,4 +1,4 @@
-![Maintainer](https://img.shields.io/badge/Maintained%20By-Ananta%20Cloud-brightgreen) [![ShellCheck GitHub Action Workflow](https://github.com/cfy9/shellcheck-action/actions/workflows/main.yaml/badge.svg)](https://github.com/anvayacloud/shellcheck-action/actions/workflows/main.yaml) [![GitHub Workflow To Create Release](https://github.com/cfy9/shellcheck-action/actions/workflows/release.yaml/badge.svg)](https://github.com/cfy9/shellcheck-action/actions/workflows/release.yaml)
+![Maintainer](https://img.shields.io/badge/Maintained%20By-Ananta%20Cloud-brightgreen) [![ShellCheck GitHub Action Workflow](https://github.com/anantacloud/shellcheck-action/actions/workflows/main.yaml/badge.svg)](https://github.com/anantacloud/shellcheck-action/actions/workflows/main.yaml) [![GitHub Workflow To Create Release](https://github.com/anantacloud/shellcheck-action/actions/workflows/release.yaml/badge.svg)](https://github.com/anantacloud/shellcheck-action/actions/workflows/release.yaml)
 
 # Introduction
 
