@@ -1,5 +1,4 @@
-![Maintainer](https://img.shields.io/badge/Maintained%20By-Ananta%20Cloud-brightgreen) [![ShellCheck GitHub Action Workflow](https://github.com/anantacloud/shellcheck-action/actions/workflows/main.yaml/badge.svg)](https://github.com/anantacloud/shellcheck-action/actions/workflows/main.yaml) [![GitHub Workflow To Create Release](https://github.com/anantacloud/shellcheck-action/actions/workflows/release.yaml/badge.svg)](https://github.com/anantacloud/shellcheck-action/actions/workflows/release.yaml)
-
+![Maintainer](https://img.shields.io/badge/Maintained%20By-Ananta%20Cloud-brightgreen) [![ShellCheck GitHub Action Workflow](https://github.com/anantacloud/shellcheck-action/actions/workflows/main.yaml/badge.svg)](https://github.com/anantacloud/shellcheck-action/actions/workflows/main.yaml)
 # Introduction
 
 This GitHub action is used to perform the linting of shell scripts for best practices.
