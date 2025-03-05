@@ -7,9 +7,9 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  shellcheck_github_action:
+  semantic_tag:
     runs-on: ubuntu-latest
-    name: shellcheck
+    name: Semantic Tag
     steps:
       - name: step to generate semantic version
         id: tag_version
@@ -31,3 +31,20 @@ jobs:
     outputs:
       new_tag: ${{ steps.tag_version.outputs.new_tag }}
       new_version: ${{ steps.tag_version.outputs.new_version }}
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: semantic_tag
+    steps:
+      - name: step to create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ jobs.semantic_tag.outputs.new_tag }}
+          release_name: Release ${{ jobs.semantic_tag.outputs.new_tag }}
+          body: |
+            Changes in this Release
+            - Added code to perform shell scripting linting
+          draft: false
+          prerelease: false
