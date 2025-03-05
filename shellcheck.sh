@@ -2,34 +2,24 @@
  
 set -e
 
-###################################
-##### function to exit script #####
-###################################
-function exitScript()
+exitScript()
 {
     local message=$1
-    [ -z "$message" ] && message="Died"
-    echo -e "${RED}[$FAILED] $message at ${BASH_SOURCE[1]}:${FUNCNAME[1]} line ${BASH_LINENO[0]}.${RESET}" >&2
+    [ -z "$message" ] && message="Failed"
+    echo "ERROR: $message at ${BASH_SOURCE[1]}:${FUNCNAME[1]} line ${BASH_LINENO[0]}." >&2
     exit 1
 }
 
-##################################################
-##### function to download shellcheck binary #####
-##################################################
-function download_shellcheck()
+download_shellcheck()
 {
     download_url="https://github.com/koalaman/shellcheck/releases/download/${INPUT_VERSION}/shellcheck-${INPUT_VERSION}.linux.x86_64.tar.xz"
-    echo $download_url
     curl -Lso "sc.tar.xz" "$download_url" || exitScript "Failed to download shellcheck, exiting..."
     tar -xf "sc.tar.xz" || exitScript "Failed to extract shellcheck, exiting..."
     mv "shellcheck-${INPUT_VERSION}/shellcheck" "${ACTION_PATH}/shellcheck" && rm -f sc.tar.xz
     echo -e "${CYAN}[$SUCCESS] shellcheck downloaded ${RESET}"
 }
 
-##################################################
-##### function to combine all passed options #####
-##################################################
-function combine_passed_options()
+combine_passed_options()
 {
     [ -n "${INPUT_SEVERITY}" ] && options+=("--severity=${INPUT_SEVERITY}")
     options+=("--format=${INPUT_FORMAT}")
@@ -37,10 +27,7 @@ function combine_passed_options()
     echo -e "${CYAN}[$SUCCESS] shellcheck passed options gathered ${RESET}"
 }
 
-#################################################
-##### function to gather all excluded paths #####
-#################################################
-function gather_excluded_paths()
+gather_excluded_paths()
 {
     excludes+=("! -path \"*./.git/*\"")
     excludes+=("! -path \"*.go\"")
@@ -68,10 +55,7 @@ function gather_excluded_paths()
     echo -e "${CYAN}[$SUCCESS] shellcheck excluded paths gathered ${RESET}"
 }
 
-##################################################
-##### function to gather all base file paths #####
-##################################################
-function gather_file_paths()
+gather_file_paths()
 {
     shebangregex="^#! */[^ ]*/(env *)?[abk]*sh"
     for path in $(find "${INPUT_SCANDIR}" -type f -type f $excludes '(' \
@@ -115,10 +99,7 @@ function gather_file_paths()
     echo -e "${CYAN}[$SUCCESS] shellcheck file paths gathered ${RESET}"
 }
 
-#############################################
-##### function to run shellcheck binary #####
-#############################################
-function run_shellcheck()
+run_shellcheck()
 {
     if [[ -n "${INPUT_CHECK_TOGETHER}" ]]; then
       shellcheck $options $filepaths || exitScript "ShellCheck found linting issue in one or more files, exiting..."
