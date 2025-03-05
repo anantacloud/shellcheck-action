@@ -12,25 +12,24 @@ jobs:
     name: Semantic Tag
     steps:
       - name: step to generate semantic version
-        id: tag_version
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          release_branches: main,master
+          release_branches: main
           dry_run: false
           create_annotated_tag: true
       - name: step to print next semantic version
-        id: tag_maker
+        id: tag_id
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           new_version=${{ steps.tag_version.outputs.new_version }}
           new_tag=${{ steps.tag_version.outputs.new_tag }}
-          echo "::set-output name=new_tag::${new_tag}"
-          echo "::set-output name=new_version::${new_version}"
+          echo "new_tag=${new_tag}" >> "$GITHUB_OUTPUT"
+          echo "new_version=${new_version}" >> "$GITHUB_OUTPUT"
     outputs:
-      new_tag: ${{ steps.tag_version.outputs.new_tag }}
-      new_version: ${{ steps.tag_version.outputs.new_version }}
+      new_tag: ${{ steps.tag_id.outputs.new_tag }}
+      new_version: ${{ steps.tag_id.outputs.new_version }}
   create_release:
     name: Create Release
     runs-on: ubuntu-latest
@@ -41,8 +40,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ jobs.semantic_tag.outputs.new_tag }}
-          release_name: Release ${{ jobs.semantic_tag.outputs.new_tag }}
+          tag_name: ${{ needs.semantic_tag.outputs.new_tag }}
+          release_name: Release ${{ needs.semantic_tag.outputs.new_tag }}
           body: |
             Changes in this Release
             - Added code to perform shell scripting linting
