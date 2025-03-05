@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run ShellCheck
-      uses: anvayacloud/shellcheck-action@main
+      uses: anantaacloud/shellcheck-action@main
 ```
 
 ## ShellCheck options
@@ -35,7 +35,7 @@ example:
 ```yaml
     ...
     - name: Run ShellCheck
-      uses: anvayacloud/shellcheck-action@main
+      uses: anantacloud/shellcheck-action@main
       with:
         SHELLCHECK_OPTS: -e SC2059 -e SC2034
 ```
@@ -49,7 +49,7 @@ For Example:
 ```yaml
     ...
     - name: Run ShellCheck
-      uses: anvayacloud/shellcheck-action@main
+      uses: anantacloud/shellcheck-action@main
       with:
         ignore_paths: ignore_xxxxx
         ignore_names: ignore_xxxxx.sh
@@ -64,7 +64,7 @@ example:
 ```yaml
     ...
     - name: Run ShellCheck
-      uses: anvayacloud/shellcheck-action@main
+      uses: anantacloud/shellcheck-action@main
       with:
         severity: error
 ```
@@ -76,7 +76,7 @@ If you have multiple directories with scripts, but only want to scan one of them
 ```yaml
    ...
    - name: Run ShellCheck
-     uses: anvayacloud/shellcheck-action@main
+     uses: anantacloud/shellcheck-action@main
      with:
        scandir: './scripts'
 ```
@@ -91,7 +91,7 @@ Shellcheck can print output in these formats: `checkstyle`, `diff`, `gcc`, `json
 ```yaml
    ...
    - name: Run ShellCheck
-     uses: anvayacloud/shellcheck-action@main
+     uses: anantacloud/shellcheck-action@main
      with:
        format: json
 ```
@@ -103,7 +103,7 @@ If running the latest stable version of Shellcheck is not to your liking, you ca
 ```yaml
    ...
    - name: Run ShellCheck
-     uses: anvayacloud/shellcheck-action@main
+     uses: anantacloud/shellcheck-action@main
      with:
        version: v0.7.0
 ```
